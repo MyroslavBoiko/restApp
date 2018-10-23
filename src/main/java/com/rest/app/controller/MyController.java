@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController(value = "/teams")
 public class MyController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class MyController {
     PlayerService playerService;
 
 
-    @RequestMapping(value = "teams", method = RequestMethod.GET,
+    @RequestMapping(method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Team>> getTeams() {
         List<Team> teams = teamService.getTeams();
@@ -33,7 +33,7 @@ public class MyController {
         return new ResponseEntity<>(teams,HttpStatus.OK);
     }
 
-    @RequestMapping(value = "teams/{id}", method = RequestMethod.GET,
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Team> getTeamById(@PathVariable Integer id) {
         Team team = teamService.getTeamById(id);
@@ -43,7 +43,7 @@ public class MyController {
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "teams/create/id={id}&name={name}", method = RequestMethod.POST,
+    @RequestMapping(value = "/create/id={id}&name={name}", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Team> createTeam(@PathVariable Integer id, @PathVariable String name) {
         Team team = teamService.createTeam(new Team(id,name));
@@ -54,7 +54,7 @@ public class MyController {
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "teams/update/id={id}&name={name}", method = RequestMethod.PUT,
+    @RequestMapping(value = "/update/id={id}&name={name}", method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Team> setTeamName(@PathVariable Integer id, @PathVariable String name) {
         Team team = teamService.setTeamName(id,name);
@@ -64,7 +64,7 @@ public class MyController {
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "teams/delete/{id}", method = RequestMethod.DELETE,
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Team> deleteTeam(@PathVariable Integer id) {
         Team team = teamService.deleteTeam(id);
@@ -74,7 +74,7 @@ public class MyController {
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "teams/{id}/players", method = RequestMethod.GET,
+    @RequestMapping(value = "/{id}/players", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Player>> getPlayersByTeamId(@PathVariable Integer id) {
         List<Player> players = playerService.getPlayersByTeamId(id);
@@ -84,7 +84,7 @@ public class MyController {
         return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "teams/{teamId}/players/create/id={id}&name={name}", method = RequestMethod.POST,
+    @RequestMapping(value = "/{teamId}/players/create/id={id}&name={name}", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Player> createPlayer(@PathVariable Integer teamId, @PathVariable Integer id, @PathVariable String name) {
         Player player = playerService.createPlayer(new Player(id,name, teamId));
@@ -95,7 +95,7 @@ public class MyController {
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "players", method = RequestMethod.GET,
+    @RequestMapping(value = "/players", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Player>> getPlayers() {
         List<Player> players = playerService.getPlayers();
@@ -105,7 +105,7 @@ public class MyController {
         return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "players/{id}", method = RequestMethod.GET,
+    @RequestMapping(value = "/players/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Player> getPlayersById(@PathVariable Integer id) {
         Player player = playerService.getPlayerById(id);
@@ -115,7 +115,7 @@ public class MyController {
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "players/update/id={id}&name={name}", method = RequestMethod.PUT,
+    @RequestMapping(value = "/players/update/id={id}&name={name}", method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Player> setPlayerName(@PathVariable Integer id, @PathVariable String name) {
         Player player = playerService.setPlayerName(id, name);
@@ -125,7 +125,7 @@ public class MyController {
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "players/delete/{id}", method = RequestMethod.DELETE,
+    @RequestMapping(value = "/players/delete/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Player> deletePlayer(@PathVariable Integer id) {
         Player player = playerService.deletePlayer(id);
