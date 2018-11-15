@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController(value = "/teams")
+@RestController
+@RequestMapping("/teams")
 public class MyController {
 
     @Autowired
